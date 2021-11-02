@@ -26,7 +26,7 @@ const sass = gulpSass(dsass)
 //Cache bust, append string to avoid cache
 import cacheBust from 'gulp-cache-bust'
 //Optimize images
-//import imagemin from 'gulp-imagemin'
+import imagemin from 'gulp-imagemin'
 //Browser sync
 import { init as server, stream, reload } from 'browser-sync'
 //Gulp plumber, prevent crashes on error
