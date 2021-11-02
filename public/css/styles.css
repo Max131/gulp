@@ -1,0 +1,18 @@
+body {
+  background-color: lightyellow;
+}
+body .disable {
+  background-color: silver;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.blue {
+  color: blue;
+}
