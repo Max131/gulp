@@ -31,6 +31,8 @@ import imagemin from 'gulp-imagemin'
 import { init as server, stream, reload } from 'browser-sync'
 //Gulp plumber, prevent crashes on error
 import plumber from 'gulp-plumber'
+//Live server 
+import gls from 'gulp-live-server'
 
 gulp.task('html', () => {
 		return gulp
@@ -122,12 +124,26 @@ gulp.task('imgmin', () => {
 
 
 gulp.task('default', () => {
-	server({
-		server: './public'
-	})
 //	gulp.watch('./src/*.html', gulp.parallel('html')).on('change', reload)
 //	gulp.watch('./src/*.css', gulp.parallel('css')).on('change', reload)
+	gulp.series('pug', 'sass', 'js')
 	gulp.watch('./src/views/**/*.pug', gulp.parallel('pug')).on('change', reload)
 	gulp.watch('./src/sass/**/*.scss', gulp.parallel('sass')).on('change', reload)
 	gulp.watch('./src/js/*.js', gulp.parallel('js')).on('change', reload)
+	server({
+		server: './public'
+	})
+})
+
+gulp.task('live', () => {
+	console.log('Hello Live');
+	gulp.series('pug', 'sass', 'js')
+	gulp.watch('./src/views/**/*.pug', gulp.parallel('pug')).on('change', reload)
+	gulp.watch('./src/sass/**/*.scss', gulp.parallel('sass')).on('change', reload)
+	gulp.watch('./src/js/*.js', gulp.parallel('js')).on('change', reload)
+	const server = gls.static('public', 3000) // = gls.static('public', 3000)
+	server.start();
+	gulp.watch('./public/**/*', file => {
+		server.notify.apply(server, [file])
+	})
 })
