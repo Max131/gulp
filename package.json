@@ -1,8 +1,13 @@
 {
-  "name": "puggulp",
+  "name": "nododev",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build",
+    "clean": "gulp clean"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
@@ -10,20 +15,21 @@
     "autoprefixer": "^10.4.0",
     "browser-sync": "^2.27.7",
     "cssnano": "^5.0.9",
+    "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-cache-bust": "^1.4.1",
-    "gulp-concat": "^2.6.1",
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "7.1.0",
-    "gulp-live-server": "^0.0.31",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^9.0.1",
     "gulp-pug": "^5.0.0",
     "gulp-purgecss": "^4.0.3",
-    "gulp-sass": "^5.0.0",
+    "gulp-stylus": "^2.7.0",
     "gulp-terser": "^2.1.0",
-    "postcss": "^8.3.11",
-    "sass": "^1.43.4"
+    "postcss": "^8.3.11"
+  },
+  "dependencies": {
+    "modern-normalize": "^1.1.0"
   }
 }
