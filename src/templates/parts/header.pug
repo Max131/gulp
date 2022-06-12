@@ -2,10 +2,20 @@ header.header
   nav.navbar
     .navbar__brand 
       a.navbar__brand-link(href='#!') Home
+    button(type='button', aria-label='Menu', aria-expanded='false', title='Show menu')
+      span(aria-hidden='true') &times;
     ul.menu
       li.menu__item
         a.menu__link(href="#!") Link 1 
       li.menu__item
         a.menu__link(href="#!") Link 2
+        ul
+          li.menu__item
+            a.menu__link(href="#!") Sub Link 1
+          li.menu__item
+            a.menu__link(href="#!") Sub Link 2
+            ul
+              li.menu__item
+                a.menu__link(href="#!") Menu third level
       li.menu__item
         a.menu__link(href="#!") Link 3
