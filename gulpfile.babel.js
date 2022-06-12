@@ -21,7 +21,7 @@ const cssPlugins = [autoprefixer(), cssnano()]
 
 gulp.task('html', () => {
 	return gulp
-		.src('src/*.pug')
+		.src('src/views/**.pug')
 		.pipe(plumber())
 		.pipe(pug({
 			pretty: true
