@@ -14,17 +14,18 @@ import {init as server, stream, reload} from 'browser-sync'
 import plumber from 'gulp-plumber'
 import del from 'del'
 
-const cssPlugins = [autoprefixer(), cssnano()]
+const isProduction = Boolean(process.env.PRODUCTION)
+const cssPlugins = isProduction ? [autoprefixer(), cssnano()] : [autoprefixer()]
 
-//import babel from 'gulp-babel' //transpile
-//import terser from 'gulp-terser' //minify js
+import babel from 'gulp-babel'
+import terser from 'gulp-terser'
 
 gulp.task('html', () => {
 	return gulp
 		.src('src/views/**.pug')
 		.pipe(plumber())
 		.pipe(pug({
-			pretty: true
+			pretty: isProduction ? false : true
 		}))
 		.pipe(cacheBust({
 			type: 'timestamp'
@@ -49,10 +50,10 @@ gulp.task('js', () => {
 	return gulp
 		.src('./src/js/*.js')
 		.pipe(plumber())
-		//	.pipe(babel({
-		//		presets: ['@babel/env']
-		//	}))
-		//.pipe(terser())
+		.pipe(isProduction && babel({
+			presets: ['@babel/env']
+		}))
+		.pipe(isProduction && terser())
 		.pipe(gulp.dest('./public/js'))
 		.pipe(stream())
 }
