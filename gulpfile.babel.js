@@ -50,16 +50,23 @@ gulp.task('js', () => {
 	return gulp
 		.src('./src/js/*.js')
 		.pipe(plumber())
-		.pipe(isProduction && babel({
-			presets: ['@babel/env']
-		}))
-		.pipe(isProduction && terser())
 		.pipe(gulp.dest('./public/js'))
 		.pipe(stream())
-}
-)
+})
 
-gulp.task('imgmin', () => {
+gulp.task('js:prod', () => {
+	return gulp
+		.src('./src/js/*.js')
+		.pipe(plumber())
+		.pipe(babel({
+			presets: ['@babel/env']
+		}))
+		.pipe(terser())
+		.pipe(gulp.dest('./public/js'))
+		.pipe(stream())
+})
+
+gulp.task('optimizeimages', () => {
 	return gulp
 		.src('./src/images/**/*')
 		.pipe(plumber())
@@ -74,6 +81,7 @@ gulp.task('imgmin', () => {
 gulp.task('cpimages', () => {
 	return gulp
 		.src('./src/images/**/*')
+		.pipe(plumber())
 		.pipe(gulp.dest('./public/images'))
 		.pipe(stream())
 })
@@ -95,5 +103,5 @@ gulp.task('clean', (end) => {
 	end()
 })
 
-gulp.task('build', gulp.series('html', 'css', 'js', 'cpimages'))
+gulp.task('build', gulp.series('html', 'css', isProduction ? 'js:prod' : 'js', isProduction ? 'optimizeimages' : 'cpimages'))
 gulp.task('default', gulp.series('build', 'watch'))
