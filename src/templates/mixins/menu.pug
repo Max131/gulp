@@ -1,0 +1,17 @@
+//- Menu
+mixin makeMenu({menuArray, menuClass, submenuClass, itemClass, linkClass})
+  - const classMenu = menuClass? menuClass : 'menu'
+  - const classSubmenu = submenuClass? submenuClass: 'sub-menu'
+  - const classItem = itemClass? itemClass: 'menu__item'
+  - const classLink = linkClass? linkClass: 'meun__link'
+  - 
+    const printMenu = menuArray => {
+
+    }
+  ul(class=classMenu)
+    each item in menuArray 
+      - const classes = `${classItem} ${item.class? item.class : ''}`
+      li(class=classes)
+        a(href=item.link, class=classLink)= item.name
+        if item.submenu
+          +makeMenu({menuArray: item.submenu, menuClass: classSubmenu})

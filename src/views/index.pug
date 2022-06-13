@@ -1,5 +1,6 @@
 extends ../templates/default
 block variables
-  - const pageClass = 'home'
+  - const pageClass = 'home landscape'
 block content
   h1 Hello World!
+  +link('Mi enlace', 'https://yep.com')(class='myClass', id='myOwn', target='_blank')
