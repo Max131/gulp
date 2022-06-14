@@ -87,8 +87,8 @@ gulp.task('cpimages', () => {
 })
 
 gulp.task('watch', () => {
-	gulp.watch('./src/**/*.pug', gulp.series('html')).on('change', reload)
-	gulp.watch('./src/styles/**/*.styl', gulp.series('css')).on('change', reload)
+	gulp.watch(['./src/pages/**/*.pug', './src/templates/**/*.pug'], gulp.series('html')).on('change', reload)
+	gulp.watch('./src/css/**/*.styl', gulp.series('css')).on('change', reload)
 	gulp.watch('./src/js/*.js', gulp.series('js')).on('change', reload)
 	gulp.watch('./src/images/**/*', gulp.series('cpimages'))
 	server({
